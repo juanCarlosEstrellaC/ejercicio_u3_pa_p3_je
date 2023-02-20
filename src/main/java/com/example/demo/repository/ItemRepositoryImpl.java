@@ -21,15 +21,6 @@ public class ItemRepositoryImpl implements IItemRepository{
 		this.entityManager.persist(item);
 	}
 
-//	//named native
-//	@Override
-//	public Item buscarCodigoBarras(Integer codigoBarras) {	
-//		// SELECT i.item_nombre FROM item i WHERE item_codigo_barras = :datoCodigo
-//		Query query = this.entityManager.createNamedQuery("Item.buscarCodigoBarras");
-//		query.setParameter("datoCodigo", codigoBarras);
-//		return (Item) query.getSingleResult();
-//	}
-
 	
 	//named native
 	@Override
