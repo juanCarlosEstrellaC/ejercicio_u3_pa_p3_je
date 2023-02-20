@@ -62,7 +62,7 @@ public class FacturaServiceImpl implements IFacturaService{
 		}
 
 		
-		//this.iFacturaRepository.realizarFactura(listaItemsSensillos, cedula, null);
+		this.iFacturaRepository.realizarFactura(miFactura);
 	}
 
 }

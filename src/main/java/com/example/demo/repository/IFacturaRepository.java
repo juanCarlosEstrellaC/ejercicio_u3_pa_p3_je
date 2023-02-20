@@ -1,10 +1,8 @@
 package com.example.demo.repository;
 
-import java.util.List;
-
-import com.example.demo.modelo.dto.ItemDto;
+import com.example.demo.modelo.Factura;
 
 public interface IFacturaRepository {
 
-	public void realizarFactura(List<ItemDto> listaItemsSensillos, String cedula, Integer numeroVenta );
+	public void realizarFactura(Factura factura);
 }
