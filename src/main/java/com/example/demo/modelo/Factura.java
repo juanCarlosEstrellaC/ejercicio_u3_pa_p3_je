@@ -39,6 +39,7 @@ public class Factura {
 	@OneToMany(mappedBy = "miFactura", cascade = CascadeType.ALL)
 	private List<DetalleFactura> miListaDetallesFact;
 
+	//toString
 	@Override
 	public String toString() {
 		return "Factura [id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", cedulaCliente=" + cedulaCliente

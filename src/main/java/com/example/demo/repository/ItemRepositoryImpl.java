@@ -21,25 +21,38 @@ public class ItemRepositoryImpl implements IItemRepository{
 		this.entityManager.persist(item);
 	}
 
+//	//named native
+//	@Override
+//	public Item buscarCodigoBarras(Integer codigoBarras) {	
+//		// SELECT i.item_nombre FROM item i WHERE item_codigo_barras = :datoCodigo
+//		Query query = this.entityManager.createNamedQuery("Item.buscarCodigoBarras");
+//		query.setParameter("datoCodigo", codigoBarras);
+//		return (Item) query.getSingleResult();
+//	}
+
+	
 	//named native
 	@Override
-	public Item buscarCodigoBarras(Integer codigoBarras) {	
-		// SELECT i.nombre FROM item i WHERE item_codigo_barras = :datoCodigo
+	public Item buscarCodigoBarras(Integer codigoBarras) {
 		Query query = this.entityManager.createNamedQuery("Item.buscarCodigoBarras");
 		query.setParameter("datoCodigo", codigoBarras);
-		
-		return (Item) query.getSingleResult();
+		return (Item) query.getSingleResult();		
 	}
 
 	@Override
-	public void actualizarPorCodigoBarras(Integer codigoBarras, Integer stock) {
-		Query query = this.entityManager.createNamedQuery("Item.actuaizarPorCodigoBarras");
+	public Long obtenerNumeroItemsBuscadoCodigoBarras(Integer codigoBarras) {	
+		// SELECT i.item_nombre FROM item i WHERE item_codigo_barras = :datoCodigo
+		Query query = this.entityManager.createNamedQuery("Item.obtenerNumeroItems");
+		query.setParameter("datoCodigo", codigoBarras);
+		return (Long) query.getSingleResult();
+	}
+	
+	@Override
+	public int actualizarPorCodigoBarras(Integer codigoBarras, Integer stock) {  //Retorna un Entero!!
+		Query query = this.entityManager.createNamedQuery("Item.actualizarPorCodigoBarras");
 		query.setParameter("datoCodigo", codigoBarras);
 		query.setParameter("datoStock", stock);
-		
-		query.executeUpdate();
+		return query.executeUpdate();
 	}
-
-
 
 }

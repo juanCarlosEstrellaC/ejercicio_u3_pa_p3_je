@@ -1,7 +1,6 @@
 package com.example.demo.modelo;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,14 +41,14 @@ public class DetalleFactura {
 	@JoinColumn(name = "fact_id_factura")
 	private Factura miFactura;
 
-	
+	//toString
 	@Override
 	public String toString() {
 		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario
 				+ ", subtotal=" + subtotal + ", miItem=" + miItem + ", miFactura=" + miFactura + "]";
 	}
 
-//Get y set
+	//Get y set
 	public Integer getId() {
 		return id;
 	}

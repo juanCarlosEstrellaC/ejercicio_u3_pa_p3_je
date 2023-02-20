@@ -14,16 +14,35 @@ public class ItemServiceImpl implements IItemService{
 	
 	@Override
 	public void ingresarItem(Item item) {
-
-		Item itemBuscado = this.iItemRepository.buscarCodigoBarras(123);
 		
-		if (itemBuscado == null) {
-			itemBuscado.setStock(1);
-			this.iItemRepository.ingresarItem(itemBuscado);
-
-		} else {
-			this.iItemRepository.actualizarPorCodigoBarras(itemBuscado.getCodigoBarras(), itemBuscado.getStock() + 1);
+		// 1. Busco si el item ya existe:
+		Integer codigoABuscar = item.getCodigoBarras();
+		Long numeroItems = this.iItemRepository.obtenerNumeroItemsBuscadoCodigoBarras(codigoABuscar);		
+		// Si No existe, lo ingreso:
+		if (numeroItems == 0) {
+			System.out.println("Item de primer ingreso");
+			this.iItemRepository.ingresarItem(item);
+		} else { //Sino, actualizo por Codigo de Barras:
+			System.out.println("Actualizar el Stock");
+			Item itemBuscado = this.iItemRepository.buscarCodigoBarras(codigoABuscar);
+			this.iItemRepository.actualizarPorCodigoBarras(itemBuscado.getCodigoBarras(), itemBuscado.getStock()+item.getStock());
 		}
+		
+		
+		
+		
+//		// 1. Busco si el item ya existe:
+//		Integer codigoABuscar = item.getCodigoBarras();
+//		Item itemBuscado = this.iItemRepository.buscarCodigoBarras(codigoABuscar);
+//		
+//		// Si No existe, lo ingreso:
+//		if (itemBuscado == null) {
+//			System.out.println("Item de primer ingreso");
+//			//this.iItemRepository.ingresarItem(item);
+//		} else { //Sino, actualizo por Codigo de Barras:
+//			System.out.println("Actualizar el Stock");
+//			//this.iItemRepository.actualizarPorCodigoBarras(itemBuscado.getCodigoBarras(), itemBuscado.getStock()+item.getStock());
+//		}
 		
 	}
 

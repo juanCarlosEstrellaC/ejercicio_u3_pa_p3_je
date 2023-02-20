@@ -16,8 +16,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "item")
-@NamedNativeQuery(name = "Item.buscarCodigoBarras", query = " SELECT i.nombre FROM item i WHERE i.item_codigo_barras = :datoCodigo")
-@NamedNativeQuery(name = "Item.actuaizarPorCodigoBarras", query = "UPDATE item i SET i.stock = :datoStock WHERE i.item_codigo_barras = :datoCodigo")
+//@NamedNativeQuery(name = "Item.buscarCodigoBarras", query = " SELECT i.nombre FROM item i WHERE i.item_codigo_barras = :datoCodigo")
+@NamedNativeQuery(name = "Item.buscarCodigoBarras", query = "SELECT * FROM item i WHERE i.item_codigo_barras = :datoCodigo", resultClass = Item.class) 
+@NamedNativeQuery(name = "Item.obtenerNumeroItems", query = "SELECT COUNT(*) FROM item i WHERE i.item_codigo_barras = :datoCodigo") 
+																																		
+//@NamedNativeQuery(name = "Item.actuaizarPorCodigoBarras", query = "UPDATE item i SET i.stock = :datoStock WHERE i.item_codigo_barras = :datoCodigo")
+@NamedNativeQuery(name = "Item.actualizarPorCodigoBarras", query = "UPDATE item  SET item_stock = :datoStock  WHERE  item_codigo_barras = :datoCodigo")
 
 public class Item { //PRODUCTO
 
@@ -46,6 +50,7 @@ public class Item { //PRODUCTO
 	@OneToMany(mappedBy = "miItem", cascade = CascadeType.ALL)
 	private List<DetalleFactura> miListaDetallesItem;
 
+	//toString
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", codigoBarras=" + codigoBarras + ", nombre=" + nombre + ", tipo=" + tipo
