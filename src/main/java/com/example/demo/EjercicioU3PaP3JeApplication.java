@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.modelo.Item;
 import com.example.demo.modelo.dto.ItemDto;
+import com.example.demo.repository.IItemRepository;
 import com.example.demo.service.IFacturaService;
 import com.example.demo.service.IItemService;
 
@@ -20,7 +21,11 @@ public class EjercicioU3PaP3JeApplication implements CommandLineRunner{
 	@Autowired
 	private IItemService iItemService;
 	
-	@Autowired IFacturaService iFacturaService;
+	@Autowired 
+	private IFacturaService iFacturaService;
+	
+	@Autowired
+	private IItemRepository iItemRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(EjercicioU3PaP3JeApplication.class, args);
@@ -38,19 +43,40 @@ public class EjercicioU3PaP3JeApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+	// literal a)
 		Item miItem = new Item();
-		miItem.setCodigoBarras(789);
-		miItem.setNombre("Taladro");
+		miItem.setCodigoBarras(963);
+		miItem.setNombre("Comedor");
 		miItem.setPrecio(new BigDecimal(89.25));
 		miItem.setTipo("hogar");
-		miItem.setStock(20);
+		miItem.setStock(2);
 		
 		this.iItemService.ingresarItem(miItem);
 		
-		//List<ItemDto> ite = new ArrayList<>();
+	// literal c)
+//		Integer stockBuscado = this.iItemService.obtenerNumeroStock(45);
+//		System.out.println(stockBuscado);
+
 		
-		//this.iFacturaService.realizarFactura(ite, "1234568", 1);
+	// literal b)
+		List<ItemDto> listaItemsDTO = new ArrayList<>();
+		ItemDto dto1 = new ItemDto(123, 7);
+		listaItemsDTO.add(dto1);
 		
+		ItemDto dto2 = new ItemDto(456, 11);
+		listaItemsDTO.add(dto2);
+
+		ItemDto dto3 = new ItemDto(789, 20);
+		listaItemsDTO.add(dto3);
+
+		
+		//this.iFacturaService.realizarFactura(listaItemsDTO, "1234568", 1);
+		
+		//Item itemOriginal = this.iItemRepository.buscarCodigoBarras(789);
+		
+//		Integer codigoABuscar = miItem.getCodigoBarras();
+//		Item itemBuscado = this.iItemRepository.buscarCodigoBarras(codigoABuscar);
+
 		
 		
 		

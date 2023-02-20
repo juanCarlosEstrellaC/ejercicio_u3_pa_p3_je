@@ -6,7 +6,7 @@ import com.example.demo.modelo.dto.ItemDto;
 
 public interface IFacturaService {
 	
-	public void realizarFactura(List<ItemDto> listaItemsSimples, String cedula, Integer numero );
+	public void realizarFactura(List<ItemDto> listaItemsSensillos, String cedula, Integer numeroVenta );
 	
 
 }

@@ -32,4 +32,19 @@ public class ItemServiceImpl implements IItemService{
 		
 	}
 
+	@Override
+	public Integer obtenerNumeroStock(Integer codigoBarras) {
+		Long numeroItems = this.iItemRepository.obtenerNumeroItemsBuscadoCodigoBarras(codigoBarras);
+		Integer auxiliar = 0;
+		
+		if (numeroItems == 0) {
+			System.out.println("No existe dicho código de barras. Cantidad de elementos:");
+		} else {
+			auxiliar =  this.iItemRepository.obtenerNumeroStock(codigoBarras);
+			System.out.println("Cantidad de elementos:");
+		}
+		
+		return auxiliar;
+	}
+
 }
