@@ -21,4 +21,11 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		this.entityManager.persist(factura);
 	}
 
+	@Override
+	public Factura buscarPorNumero(Integer numero) {
+		Query miQuery = this.entityManager.createNamedQuery("Factura.buscarPorNumero");
+		miQuery.setParameter("datoFactura", numero);
+		return (Factura) miQuery.getSingleResult();
+	}
+
 }

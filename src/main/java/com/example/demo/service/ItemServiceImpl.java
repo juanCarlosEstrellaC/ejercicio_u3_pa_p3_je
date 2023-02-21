@@ -25,7 +25,7 @@ public class ItemServiceImpl implements IItemService{
 			this.iItemRepository.ingresarItem(item);
 		} else { //Sino, actualizo por Codigo de Barras:
 			System.out.println("Actualizar el Stock");
-			Item itemBuscado = this.iItemRepository.buscarCodigoBarras(codigoABuscar);
+			Item itemBuscado = metodoBuscarCodigoBarras(codigoABuscar);
 			this.iItemRepository.actualizarPorCodigoBarras(itemBuscado.getCodigoBarras(), itemBuscado.getStock()+item.getStock());
 		}
 
@@ -47,4 +47,22 @@ public class ItemServiceImpl implements IItemService{
 		return auxiliar;
 	}
 
+	@Override
+	public Item metodoBuscarCodigoBarras(Integer codigoABuscar) {
+		Long numeroItems = this.iItemRepository.obtenerNumeroItemsBuscadoCodigoBarras(codigoABuscar);
+		if (numeroItems == 0) {
+			System.out.println("No existe dicho producto.");
+			return null;
+		} else {
+			return this.iItemRepository.buscarCodigoBarras(codigoABuscar);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

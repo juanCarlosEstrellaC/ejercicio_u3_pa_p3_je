@@ -7,15 +7,19 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "factura")
+
+@NamedQuery(name = "Factura.buscarPorNumero", query = "SELECT f FROM Factura f WHERE f.numero = :datoFactura")
 public class Factura {
 	
 	@Id
@@ -36,7 +40,7 @@ public class Factura {
 	@Column(name = "fact_total_venta")
 	private BigDecimal totalVenta;
 	
-	@OneToMany(mappedBy = "miFactura", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "miFactura", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<DetalleFactura> miListaDetallesFact;
 
 	//toString
@@ -45,8 +49,9 @@ public class Factura {
 		return "Factura [id=" + id + ", numero=" + numero + ", fecha=" + fecha + ", cedulaCliente=" + cedulaCliente
 				+ ", totalVenta=" + totalVenta + "]";
 	}
-
 	
+	
+
 	//GET Y SET
 	public Integer getId() {
 		return id;

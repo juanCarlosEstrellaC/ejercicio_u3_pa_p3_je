@@ -9,9 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.demo.modelo.DetalleFactura;
+import com.example.demo.modelo.Factura;
 import com.example.demo.modelo.Item;
 import com.example.demo.modelo.dto.ItemDto;
-import com.example.demo.repository.IItemRepository;
 import com.example.demo.service.IFacturaService;
 import com.example.demo.service.IItemService;
 
@@ -43,22 +44,20 @@ public class EjercicioU3PaP3JeApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 	// literal a)
+		System.out.println(" ***************** Literal A *****************");
 		Item miItem = new Item();
 		miItem.setCodigoBarras(963);
 		miItem.setNombre("Comedor");
 		miItem.setPrecio(new BigDecimal(89.25));
 		miItem.setTipo("hogar");
-		miItem.setStock(4);
+		miItem.setStock(200);
 		
 		this.iItemService.ingresarItem(miItem);
 		System.out.println("");
-		
-	// literal c)
-		Integer stockBuscado = this.iItemService.obtenerNumeroStock(45);
-		System.out.println(stockBuscado);
-		System.out.println("");
+	
 		
 	// literal b)
+		System.out.println(" ***************** Literal B *****************");
 		List<ItemDto> listaItemsDTO = new ArrayList<>();
 		ItemDto dto1 = new ItemDto(123, 7);
 		listaItemsDTO.add(dto1);
@@ -69,11 +68,24 @@ public class EjercicioU3PaP3JeApplication implements CommandLineRunner{
 		ItemDto dto3 = new ItemDto(789, 20);
 		listaItemsDTO.add(dto3);
 
+		ItemDto dto4 = new ItemDto(963, 20);
+		listaItemsDTO.add(dto4);
 		
-		this.iFacturaService.realizarFactura(listaItemsDTO, "1234568", 1);
+		Integer numeroFactura = 16;
+		this.iFacturaService.realizarFactura(listaItemsDTO, "1234568", numeroFactura);
 		
+		// Imprimir la factura:
+		Factura factura = this.iFacturaService.buscarPorNumero(numeroFactura);
+		System.out.println(factura);
+		for (DetalleFactura detalle : factura.getMiListaDetallesFact()) {
+			System.out.println(detalle);
+		}
+		
+		// literal c)
+		System.out.println(" ***************** Literal C *****************");
+		Integer stockBuscado = this.iItemService.obtenerNumeroStock(456);
+		System.out.println(stockBuscado+"\n");
 
-		
 	}
 	
 }
